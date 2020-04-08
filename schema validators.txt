@@ -1,0 +1,157 @@
+
+let customerSchema =  {
+		  required: [ "name", "email", "password" ],
+		  properties: {
+			 name: { bsonType: "string" },
+			 email: { bsonType: "string",pattern:"[a-z0-9\._%+!$&*=^|~#%{}/\-]+@([a-z0-9\-]+\.){1,}([a-z]{2,22})"},
+			 password: { bsonType: "string" },
+			 orderNo:{  bsonType: "array",
+						
+						uniqueItems: true,},
+			  address: {
+						 bsonType: "object",
+						 required: [ "street", "town", "zip" ],
+						 properties: {
+							street: {
+							   bsonType: "string",
+							},
+							zip: {
+							   bsonType: "int",
+							   minimum: 1000,
+							   maximum: 9999
+							},
+							town: {
+							   bsonType: "string",
+							}
+						 }
+					  }           
+		  }
+	 }
+
+db.createCollection('customer', {
+			validator: {
+				$jsonSchema: customerSchema
+		} }, (err, response) => { });
+
+____________________________________________
+let orderSchema =  {
+		  required: [ "date", "state"],
+		  properties: {
+                        date: {   bsonType: "string",
+               description: "format: yyyy-MM-dd"
+            },
+	state: {   bsonType: "string"  },
+
+             books: {
+               bsonType: "array",
+               items: {
+                   bsonType: "object",
+                       properties:{
+                           ISBN: { bsonType: "string" },
+                            price: { bsonType: "decimal" },
+                              qty: { bsonType: "int" }
+               
+                           }
+                   }
+            }
+          
+			
+		         
+		  }
+	 }
+
+db.createCollection('order', {
+			validator: {
+				$jsonSchema: orderSchema
+		} }, (err, response) => { });
+
+____________________________________________
+
+
+let autherSchema =  {
+		  required: [ "name", "email" ],
+		  properties: {
+			 name: { bsonType: "string" },
+			 email: { bsonType: "string",pattern:"[a-z0-9\._%+!$&*=^|~#%{}/\-]+@([a-z0-9\-]+\.){1,}([a-z]{2,22})"},
+			 password: { bsonType: "string" },
+			
+			  address: {
+						 bsonType: "object",
+						 required: [ "street", "town", "zip" ],
+						 properties: {
+							street: {
+							   bsonType: "string",
+							},
+							zip: {
+							   bsonType: "int",
+							   minimum: 1000,
+							   maximum: 9999
+							},
+							town: {
+							   bsonType: "string",
+							}
+						 }
+					  }           
+		  }
+	 }
+
+db.createCollection('author', {
+			validator: {
+				$jsonSchema: autherSchema
+		} }, (err, response) => { });
+
+
+
+____________________________________________
+
+
+let bookSchema =  {
+		  required: [ "ISBN", "price","pages","copies","language","title" ],
+		  properties: {
+			 ISBN: { bsonType: "string" },
+                        pendingOrders:{bsonType:"array"},
+                         language: { bsonType: "string" },
+                         title: { bsonType: "string" },
+                         price: {  bsonType: "decimal" },
+                         pages:{bsonType: "int",},
+                         copies:{bsonType: "int",},
+                          character: {
+               bsonType: "object",
+               required: ["type"],
+               properties: {
+                  type: { bsonType: "string" }
+               }
+            },
+                         author:{bsonType:"array"},
+                         category:{bsonType:"array"}
+			
+			
+          
+		  }
+	 }
+db.createCollection('book', {
+			validator: {
+				$jsonSchema: bookSchema
+		} }, (err, response) => { });
+
+let categorySchema =  {
+		  required: [ "name", "parent" ],
+		  properties: {
+			 name: { bsonType: "string" },
+                         parent: { bsonType: "string" }  } }
+
+db.createCollection('category', {
+			validator: {
+				$jsonSchema: categorySchema
+		} }, (err, response) => { });
+
+
+
+
+db.runCommand({collMod:'customer',validationLevel:'moderate',validationAction:'error'})
+db.runCommand({collMod:'order',validationLevel:'strict',validationAction:'error'})
+db.runCommand({collMod:'book',validationLevel:'moderate',validationAction: 'error'})
+db.runCommand({collMod:'category',validationLevel:'moderate',validationAction:'error'})
+db.runCommand({collMod:'author',validationLevel:'moderate',validationAction:'error'})
+
+
