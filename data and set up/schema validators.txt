@@ -32,6 +32,15 @@ db.createCollection('customer', {
 			validator: {
 				$jsonSchema: customerSchema
 		} }, (err, response) => { });
+		
+
+db.customer.createIndex({'name':1})
+
+
+
+
+
+
 
 ____________________________________________
 let orderSchema =  {
@@ -101,6 +110,7 @@ db.createCollection('author', {
 		} }, (err, response) => { });
 
 
+db.author.createIndex({'name':1})
 
 ____________________________________________
 
@@ -133,6 +143,12 @@ db.createCollection('book', {
 			validator: {
 				$jsonSchema: bookSchema
 		} }, (err, response) => { });
+		
+		
+db.book.createIndex({ISBN:1},{unique:true})
+		
+____________________________________________
+
 
 let categorySchema =  {
 		  required: [ "name", "parent" ],
@@ -146,6 +162,7 @@ db.createCollection('category', {
 		} }, (err, response) => { });
 
 
+db.category.createIndex({'name':1})
 
 
 db.runCommand({collMod:'customer',validationLevel:'moderate',validationAction:'error'})
