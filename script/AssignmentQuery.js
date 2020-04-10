@@ -192,18 +192,7 @@ db.order.aggregate([unwindBooksArray,groupByQty,matchSallingNumber])
 __________________________________
 
 
-9.Number of copies of each book sold – unsold books should show as 0 sold copies.see page 112 find all books and subtract the array of isbns and then project every thing 
-///////////// we still need to add the unsold books to the array
-
-var unwindBooksArray = {$unwind:'$book'}
-
-var joinBookOrder = { $lookup:{from:'book', foreignField:'ISBN',localField:'book.ISBN',as : 'booksDetails'  }};
-
-var unwindBooksDetailsArray = {$unwind:'$booksDetails'}
-
-var groupByISBN = {$group:{ _id:'$book.ISBN',title:{$max:'$booksDetails.title'},quantity_Sold :{$sum:'$book.qty'}}}
-
-db.order.aggregate([unwindBooksArray,joinBookOrder,unwindBooksDetailsArray,groupByISBN])
+9.Number of copies of each book sold – unsold books should show as 0 sold copies.see page 112 find all books and subtract the array of isbns and then project every thing var unwindBooksArray = {$unwind:'$book'}var joinBookOrder = { $lookup:{from:'book', foreignField:'ISBN',localField:'book.ISBN',as : 'booksDetails'  }};var unwindBooksDetailsArray = {$unwind:'$booksDetails'}var groupByISBN = {$group:{ _id:'$book.ISBN',title:{$max:'$booksDetails.title'},quantity_Sold :{$sum:'$book.qty'}}}var booksSaling = db.order.aggregate([unwindBooksArray,joinBookOrder,unwindBooksDetailsArray,groupByISBN]).toArray()var soldBooks = booksSaling.map( x => x._id ).sort()var unsoldBooks = db.book.aggregate([{$match:{ISBN:{$nin:soldBooks}}},{$project:{ ISBN:1,title:1,quantity_Sold:{$literal:0}}}]).toArray()       db.order.aggregate([     { $project: { books: { $setUnion: [ unsoldBooks, booksSaling] },_id:0}},{$unwind:'$books'},     {$group:{_id:'$books._id',title:{$max:'$books.title'},quantity_Sold :{$max:'$books.quantity_Sold'}}}  ])                            
 
 ______________-
 
