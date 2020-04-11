@@ -1,6 +1,6 @@
 
 
-first shard : 
+//first shard : 
 
 mongod --dbpath C:\Users\fadid\sharding\shard1\db11 --port 27117 --replSet shard1
 mongod --dbpath C:\Users\fadid\sharding\shard1\db12 --port 27127 --replSet shard1
@@ -20,7 +20,7 @@ var configuration = {
 rs.initiate(configuration)	   
 	   
 
-second shard 	   
+//second shard 	   
 
 mongod --dbpath C:\Users\fadid\sharding\shard2\db21 --port 27217 --replSet shard2
 mongod --dbpath C:\Users\fadid\sharding\shard2\db22 --port 27227 --replSet shard2

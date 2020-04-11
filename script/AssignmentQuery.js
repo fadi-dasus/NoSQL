@@ -23,30 +23,25 @@ ______________-
 
 2. total price of an order
 
-var booksTotalPice=  {
-        $addFields: {
-            book: {
-                $map: {
-                    input: "$book",
-                    in: {
-                        $mergeObjects: [
-                            "$$this",
-                            { total: { $multiply: [ "$$this.qty", "$$this.price" ] } }
-                        ]
-                    }
-                }
-            }
-        }
+var booksTotalPice=  {
+        $addFields: {
+            book: {
+                $map: {
+                    input: "$book",
+                    in: {
+                        $mergeObjects: [
+                            "$$this",
+                            { total: { $multiply: [ "$$this.qty", "$$this.price" ] } }
+                        ]
+                    }
+                }
+            }
+        }
     }
 
 var unwind={$unwind:{path:'$book'}}
-    
-var groupByOrderId = {
-    
-    $group:{ _id:'$_id',
-         TotalSale:{$sum:'$book.total'} }}
-      
-
+var groupByOrderId = {   $group:{ _id:'$_id', TotalSale:{$sum:'$book.total'} }}
+
 db.order.aggregate([booksTotalPice,unwind,groupByOrderId])
 
 
@@ -60,38 +55,20 @@ var map = function() {
                            var total = {                                  
                                         totalSale: this.book[idx].qty * parseFloat(this.book[idx].price.toJSON()["$numberDecimal"])
                                        };
-                           emit(key, total); 
-                                       }
+											emit(key, total); 
+                                       }
                     };
                     
                     
 var reduce = function(keyId, ObjVals) {
                         var total = 0;
-
                      for (var idx = 0; idx < ObjVals.length; idx++) {
-                         total += ObjVals[idx].totalSale;
-                         
-                     }
-
+                         total += ObjVals[idx].totalSale;
+							}
                      return total;
                   };                    
-                    
-                    
-                  
-                    
-
-
-
-db.order.mapReduce(
-                     map,
-                     reduce,
-                  {
-                     out: "orderTotal",
-                     query: { _id: 1 },
-                 }
-                   )
-
-
+
+db.order.mapReduce( map, reduce,  {  out: "orderTotal",    query: { _id: 1 },    }       )
 db.orderTotal.find()
 
 
@@ -100,40 +77,11 @@ __________________________________
 
 3.total sale for a cutomer
 
-var cutomer= {
-    
-    $match:{
-        name:{$eq:'Clause'}
-        }
-    }
-
-
-var unwindordersArray = { 
-    $unwind:{path:'$orderNo' ,
-             preserveNullAndEmptyArrays:true  }
-    }
-var joinCustomerOrders = {
-    $lookup:{
-        from:'order',
-        foreignField:'_id',
-        localField:'orderNo',
-        as : 'Customer_Order'
-        }
-    }    
-    
-var groupByCutomerId =  {    
-$group:{ _id:'$_id',
-        name:{$max:'$name'},
-        email:{$max:'$email'},
-        orderNo:{$addToSet:'$orderNo'},
-        orders:{$addToSet:'$Customer_Order'}
-        }}
-  
-  
-var unwindBooksObjectArray = { 
-    $unwind:{path:'$Customer_Order.book' ,
-             preserveNullAndEmptyArrays:true  }
-    }
+var cutomer= {    $match:{ name:{$eq:'Clause'}    }   }
+var unwindordersArray = {    $unwind:{path:'$orderNo' ,  preserveNullAndEmptyArrays:true  }   }
+var joinCustomerOrders = {   $lookup:{ from:'order', foreignField:'_id', localField:'orderNo',  as : 'Customer_Order'    }   }    
+var groupByCutomerId =  {    $group:{ _id:'$_id',  name:{$max:'$name'},   email:{$max:'$email'},   orderNo:{$addToSet:'$orderNo'},   orders:{$addToSet:'$Customer_Order'}       }}
+var unwindBooksObjectArray = {   $unwind:{path:'$Customer_Order.book' ,   preserveNullAndEmptyArrays:true  }    }
         
 
 db.customer.aggregate([cutomer,unwindordersArray,joinCustomerOrders,unwindBooksObjectArray,groupByCutomerId])
