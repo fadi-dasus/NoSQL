@@ -70,9 +70,9 @@ rs.status()
 
 //direct the router to the replica config servers using mongos 
 
-mongos --port 3000 --configdb configReplica/localhost:30117,localhost:30127,localhost:30137
+mongos --configdb configReplica/localhost:30117,localhost:30127,localhost:30137
 
-//adding the shards to the cluster from mongos on port 3000
+//adding the shards to the cluster from mongos on the default port
 
 sh.addShard('shard1/localhost:27117')
 sh.addShard('shard2/localhost:27217')

@@ -166,9 +166,12 @@ db.category.createIndex({'name':1})
 
 
 db.runCommand({collMod:'customer',validationLevel:'moderate',validationAction:'error'})
-db.runCommand({collMod:'order',validationLevel:'strict',validationAction:'error'})
+db.runCommand({collMod:'order',validationLevel:'moderate',validationAction:'error'})
 db.runCommand({collMod:'book',validationLevel:'moderate',validationAction: 'error'})
 db.runCommand({collMod:'category',validationLevel:'moderate',validationAction:'error'})
 db.runCommand({collMod:'author',validationLevel:'moderate',validationAction:'error'})
 
+Moderate : the validation will be applied for inserting new documents, but only update on existing valid documents, if an existing document is not valid, the validation rules are not checked
+For validation actions
+Error : the document is not inserted
 
