@@ -11,9 +11,9 @@ mongod --dbpath C:\Users\fadid\sharding\shard1\db13 --port 27137 --replSet shard
 var configuration = {
     _id:'shard1', 
     members:[
-    {_id:0,host:'localhost:27117'},
-    {_id:1,host:'localhost:27127'},
-    {_id:2,host:'localhost:27137'}
+    {_id:0,host:'localhost:27117',votes:1},},
+    {_id:1,host:'localhost:27127',slaveDelay:20,priority:0,votes:1},
+    {_id:2,host:'localhost:27137',votes:1}
             ]
        }
 	   
@@ -31,9 +31,9 @@ mongod --dbpath C:\Users\fadid\sharding\shard2\db23 --port 27237 --replSet shard
 var configuration = {
    _id:'shard2',
      members:[
-     {_id:0,host:'localhost:27217'},
-     {_id:1,host:'localhost:27227'},
-     {_id:2,host:'localhost:27237'}
+     {_id:0,host:'localhost:27217',votes:1},
+     {_id:1,host:'localhost:27227',slaveDelay:20,priority:0,votes:1},
+     {_id:2,host:'localhost:27237',votes:1}
              ]
         }
 		
