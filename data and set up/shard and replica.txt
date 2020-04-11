@@ -1,0 +1,90 @@
+
+
+first shard : 
+
+mongod --dbpath C:\Users\fadid\sharding\shard1\db11 --port 27117 --replSet shard1
+mongod --dbpath C:\Users\fadid\sharding\shard1\db12 --port 27127 --replSet shard1
+mongod --dbpath C:\Users\fadid\sharding\shard1\db13 --port 27137 --replSet shard1
+
+
+// configure the replicaSet for the first shard on port  27117
+var configuration = {
+    _id:'shard1', 
+    members:[
+    {_id:0,host:'localhost:27117'},
+    {_id:1,host:'localhost:27127'},
+    {_id:2,host:'localhost:27137'}
+            ]
+       }
+	   
+rs.initiate(configuration)	   
+	   
+
+second shard 	   
+
+mongod --dbpath C:\Users\fadid\sharding\shard2\db21 --port 27217 --replSet shard2
+mongod --dbpath C:\Users\fadid\sharding\shard2\db22 --port 27227 --replSet shard2
+mongod --dbpath C:\Users\fadid\sharding\shard2\db23 --port 27237 --replSet shard2
+
+// configure the replicaSet for the first shard on port  27217
+
+var configuration = {
+   _id:'shard2',
+     members:[
+     {_id:0,host:'localhost:27217'},
+     {_id:1,host:'localhost:27227'},
+     {_id:2,host:'localhost:27237'}
+             ]
+        }
+		
+		
+ rs.initiate(configuration)
+ rs.status()
+ 
+ 
+ 
+//  config servers as replica set (no delayed serves, no arbitars, every member create indexes )
+ 
+mongod --dbpath  C:\Users\fadid\sharding\config\config1 --port 30117 --replSet configReplica --configsvr
+mongod --dbpath  C:\Users\fadid\sharding\config\config2 --port 30127 --replSet configReplica --configsvr
+mongod --dbpath  C:\Users\fadid\sharding\config\config3 --port 30137 --replSet configReplica --configsvr
+
+ 
+ var configuration = {
+    _id:'configReplica',
+   configsvr:true,
+    members:[
+    {_id:0,host:'localhost:30117'},
+    {_id:1,host:'localhost:30127'},
+    {_id:2,host:'localhost:30137'}
+            ]
+       }
+	   
+	   
+rs.initiate(configuration)
+rs.status()
+
+
+
+//so far we have two replica sets to be used as shard1, shard2 and one replica as a config servers 
+
+//direct the router to the replica config servers using mongos 
+
+mongos --port 3000 --configdb configReplica/localhost:30117,localhost:30127,localhost:30137
+
+//adding the shards to the cluster from mongos on port 3000
+
+sh.addShard('shard1/localhost:27117')
+sh.addShard('shard2/localhost:27217')
+
+sh.status()
+
+//eanabling sharding on the database
+sh.enablesharding('assignment')
+
+//sharding the book collection, and use a compound sort key as our shard key on fields (ISBN and title}) for distributing chnks evenly on our shards
+
+sh.shardCollection('assignment.book',{ISBN:1,title:1}) compound shard key that ensure the uniqueness of the key
+
+
+
