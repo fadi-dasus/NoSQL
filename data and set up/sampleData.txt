@@ -1,0 +1,119 @@
+category
+ 
+db.category.insertMany([
+{_id:1,name:'Book',parent:'Root'},
+{_id:2,name:'Fiction',parent:'Book'},
+{_id:3,name:'Non-Fiction',parent:'Book'},
+{_id:4,name:'Fantasy and Science Fiction',parent:'Fiction'},
+{_id:5,name:'Fantasy',parent:'Fantasy and Science Fiction'},
+{_id:6,name:'Science Fiction',parent:'Fantasy and Science Fiction'},
+{_id:7,name:'Space Opera',parent:'Science Fiction'},
+{_id:8,name:'Dystopian',parent:'Science Fiction'},
+{_id:9,name:'Cyberpunk',parent:'Science Fiction'}
+])
+
+______________________________________________________
+
+customer 
+
+db.customer.insertMany([
+{_id:1,name:'Peter',email:'peter@gmail.com',password:'peterpeter',orderNo:[1,2,3],address:{street:'voensvej',zip:NumberInt(8700),town:'Horsens'}},
+{_id:2,name:'John',email:'john@gmail.com',password:'John.peter',orderNo:[],address:{street:'vejlevej',zip:NumberInt(8700),town:'Horsens'}},
+{_id:3,name:'Lars',email:'lars@gmail.com',password:'peter.Lars',orderNo:[4,5],address:{street:'koldingvej',zip:NumberInt(8700),town:'Horsens'}},
+{_id:4,name:'Peer',email:'peer@gmail.com',password:'peer',orderNo:[],address:{street:'randasvej',zip:NumberInt(8700),town:'Horsens'}},
+{_id:5,name:'Poul',email:'Poul@gmail.com',password:'Poul.Poul',orderNo:[6],address:{street:'ejbyvej',zip:NumberInt(8700),town:'Horsens'}},
+{_id:6,name:'Pieer',email:'piee@rgmail.com',password:'pieer',orderNo:[7],address:{street:'viavej',zip:NumberInt(8700),town:'Horsens'}},
+{_id:7,name:'Tom',email:'tom@gmail.com',password:'petTomter',orderNo:[8],address:{street:'skolevej',zip:NumberInt(8700),town:'Horsens'}},
+{_id:8,name:'Tomy',email:'tomy@gmail.com',password:'peTom',orderNo:[9],address:{street:'brovejen',zip:NumberInt(8700),town:'Horsens'}},
+{_id:9,name:'Fadi',email:'fadi@gmail.com',password:'peFadier',orderNo:[10],address:{street:'aalborgvej',zip:NumberInt(8700),town:'Horsens'}},
+{_id:10,name:'Clause',email:'clause@gmail.com',password:'peasfasfr',orderNo:[11,12,13],address:{street:'aarhusvej',zip:NumberInt(8700),town:'Horsens'}},
+{_id:11,name:'Kiel',email:'kiel@gmail.com',password:'petKielter',orderNo:[14],address:{street:'middelfartvej',zip:NumberInt(8700),town:'Horsens'}},
+{_id:12,name:'Bodil',email:'bodil@gmail.com',password:'peBodiler',orderNo:[],address:{street:'horsensvej',zip:NumberInt(8700),town:'Horsens'}},
+{_id:13,name:'Parker',email:'Parker@gmail.com',password:'Parker',orderNo:[],address:{street:'vejlevej',zip:NumberInt(8700),town:'Horsens'}}
+]) 
+
+
+______________________________________________________
+
+author
+  
+db.author.insertMany([
+{_id:1,name:'Robert hug',email:'hug@gmail.com'},
+{_id:2,name:'Victor stefan',email:'victor@gmail.com'},
+{_id:3,name:'Stefan',email:'stefan@gmail.com'},
+{_id:4,name:'Jo',email:'jo@gmail.com'},
+{_id:5,name:'Poul',email:'Poul@gmail.com'},
+{_id:6,name:'Jan',email:'jan@rgmail.com'},
+{_id:7,name:'Tom',email:'tom@gmail.com'},
+{_id:8,name:'Tomy',email:'tomy@gmail.com'},
+{_id:9,name:'Giuth',email:'giuth@gmail.com'},
+{_id:10,name:'Klause',email:'klause@gmail.com'},
+{_id:11,name:'Kiel strre',email:'kiel@gmail.com'},
+{_id:12,name:'Bodil toft',email:'bodil@gmail.com'}
+])
+
+
+
+______________________________________________________
+book
+db.book.insertMany([
+{_id:1,ISBN:'a1',price:NumberDecimal("10.0"),pages:NumberInt(402),copies:NumberInt(40),language:'en',author:[1,2],cahracter:{type:'Count Almaviva'},title:'Cat on a Hot Tin Roof',category:['Space Opera']},
+{_id:2,ISBN:'a2',price:NumberDecimal("100.0"),pages:NumberInt(420),copies:NumberInt(40),language:'en',author:[1],cahracter:{type:'The Alvings '},title:'Women in Love',category:['Dystopian']},
+{_id:3,ISBN:'a3',price:NumberDecimal("102.0"),pages:NumberInt(4420),copies:NumberInt(40),language:'en',author:[11],cahracter:{type:'Alceste'},title:'Lord Peter Wimsey series',category:['Space Opera']},
+{_id:4,ISBN:'a4',price:NumberDecimal("102.0"),pages:NumberInt(4025),copies:NumberInt(40),language:'en',author:[12],cahracter:{type:'Albertine'},title:'Ulysses',category:['Dystopian']},
+{_id:5,ISBN:'a5',price:NumberDecimal("142.0"),pages:NumberInt(401),copies:NumberInt(40),language:'en',author:[14],cahracter:{type:'Frankie Addams'},title:'Brideshead Revisited',category:['Space Opera']},
+{_id:6,ISBN:'a6',price:NumberDecimal("123.0"),pages:NumberInt(401),copies:NumberInt(40),language:'en',author:[3],cahracter:{type:'Bilbo Baggins'},title:'Tales of Mother Goose',category:['Dystopian']},
+{_id:7,ISBN:'a7',price:NumberDecimal("1235.0"),pages:NumberInt(402),copies:NumberInt(40),language:'en',author:[2],cahracter:{type:'Mr. Bumble'},title:'Far from the Madding Crowd',category:['Space Opera']},
+{_id:8,ISBN:'a8',price:NumberDecimal("123.0"),pages:NumberInt(4025),copies:NumberInt(40),language:'en',author:[4],cahracter:{type:'Bluebeard'},title:'The Hunting of the Snark',category:['Cyberpunk']},
+{_id:9,ISBN:'a9',price:NumberDecimal("1235.0"),pages:NumberInt(40),copies:NumberInt(40),language:'en',author:[5],cahracter:{type:'Boojum'},title:'lord of shadow',category:['Cyberpunk']},
+{_id:10,ISBN:'a10',price:NumberDecimal("230.0"),pages:NumberInt(430),copies:NumberInt(670),language:'en',author:[6],cahracter:{type:'dew'},title:'firght night',category:['Cyberpunk']},
+{_id:11,ISBN:'a11',price:NumberDecimal("120.0"),pages:NumberInt(430),copies:NumberInt(30),language:'en',author:[7],cahracter:{type:'tom'},title:'lucifer',category:['Cyberpunk']},
+{_id:12,ISBN:'a12',price:NumberDecimal("210.0"),pages:NumberInt(40),copies:NumberInt(460),language:'en',author:[8],cahracter:{type:'jery'},title:'arther',category:['Cyberpunk']},
+{_id:13,ISBN:'a13',price:NumberDecimal("510.0"),pages:NumberInt(450),copies:NumberInt(460),language:'en',author:[9],cahracter:{type:'ch bi'},title:'king li',category:['Dystopian']},
+{_id:14,ISBN:'a14',price:NumberDecimal("610.0"),pages:NumberInt(402),copies:NumberInt(460),language:'en',author:[10],cahracter:{type:'ffahd'},title:'the lion king',category:['Dystopian']},
+{_id:15,ISBN:'a15',price:NumberDecimal("231.0"),pages:NumberInt(420),copies:NumberInt(350),language:'en',author:[11],cahracter:{type:'shoja'},title:'old school',category:['Space Opera']},
+{_id:16,ISBN:'a16',price:NumberDecimal("103.0"),pages:NumberInt(240),copies:NumberInt(350),language:'en',author:[12],cahracter:{type:'stev'},title:'the tiger',category:['Space Opera']},
+{_id:17,ISBN:'a17',price:NumberDecimal("160.0"),pages:NumberInt(340),copies:NumberInt(350),language:'en',author:[10,11],cahracter:{type:'robin'},title:'ms parker',category:['Cyberpunk']},
+{_id:18,ISBN:'a18',price:NumberDecimal("17.0"),pages:NumberInt(450),copies:NumberInt(350),language:'en',author:[6,7],cahracter:{type:'caBalfourh'},title:'stup',category:['Dystopian']},
+{_id:19,ISBN:'a19',price:NumberDecimal("190.0"),pages:NumberInt(540),copies:NumberInt(530),language:'en',author:[8,5],cahracter:{type:'Bunter'},title:'staborn',category:['Space Opera']},
+{_id:20,ISBN:'a20',price:NumberDecimal("240.0"),pages:NumberInt(450),copies:NumberInt(320),language:'en',author:[6,3],cahracter:{type:'Brer Rabbit'},title:'Nineteen Eighty-four',category:['Dystopian']},
+{_id:21,ISBN:'a21',price:NumberDecimal("250.0"),pages:NumberInt(460),copies:NumberInt(320),language:'en',author:[1,9],cahracter:{type:'Brer Rabbit'},title:'War and Peace',category:['Space Opera']},
+{_id:22,ISBN:'a22',price:NumberDecimal("256.0"),pages:NumberInt(480),copies:NumberInt(140),language:'en',author:[10,11],cahracter:{type:'Bobbsey Twins '},title:'Mansfield Park',category:['Space Opera']},
+{_id:23,ISBN:'a23',price:NumberDecimal("250.0"),pages:NumberInt(480),copies:NumberInt(320),language:'en',author:[11,1],cahracter:{type:'Big Daddy'},title:'Pride and Prejudice',category:['Space Opera']},
+{_id:24,ISBN:'a24',price:NumberDecimal("460.0"),pages:NumberInt(840),copies:NumberInt(640),language:'en',author:[3,6],cahracter:{type:'Josiah Bounderby'},title:'Paradise Lost',category:['Dystopian']},
+{_id:25,ISBN:'a25',price:NumberDecimal("460.0"),pages:NumberInt(840),copies:NumberInt(440),language:'en',author:[2,5],cahracter:{type:'Josiah Bounderby'},title:'Adam Bede',category:['Space Opera']},
+{_id:26,ISBN:'a26',price:NumberDecimal("140.0"),pages:NumberInt(490),copies:NumberInt(140),language:'en',author:[7,3],cahracter:{type:'Anthony Blanche'},title:'Fathers and Sons',category:['Fantasy']},
+{_id:27,ISBN:'a27',price:NumberDecimal("177.0"),pages:NumberInt(940),copies:NumberInt(240),language:'en',author:[8],cahracter:{type:'Bertram family'},title:'The House of Mirth',category:['Fantasy']},
+{_id:28,ISBN:'a28',price:NumberDecimal("137.0"),pages:NumberInt(40),copies:NumberInt(1240),language:'en',author:[1],cahracter:{type:'Belial'},title:'The Sun Also Rises',category:['Fantasy']},
+{_id:29,ISBN:'a29',price:NumberDecimal("137.0"),pages:NumberInt(40),copies:NumberInt(42324),language:'en',author:[1],cahracter:{type:'Adam Bede'},title:'Copperfield',category:['Fantasy']},
+{_id:30,ISBN:'a30',price:NumberDecimal("124.0"),pages:NumberInt(460),copies:NumberInt(236),language:'en',author:[4],cahracter:{type:'Lily Bart '},title:'Kidnapped',category:['Fantasy']},
+{_id:31,ISBN:'a31',price:NumberDecimal("180.0"),pages:NumberInt(640),copies:NumberInt(43),language:'en',author:[2],cahracter:{type:'Jake Barnes'},title:'The Canterbury Tales',category:['Fantasy']},
+{_id:32,ISBN:'a32',price:NumberDecimal("190.0"),pages:NumberInt(740),copies:NumberInt(470),language:'en',author:[2],cahracter:{type:'David Balfour'},title:'The Hobbitt',category:['Non-Fiction']},
+{_id:34,ISBN:'a34',price:NumberDecimal("190.0"),pages:NumberInt(740),copies:NumberInt(30),language:'en',author:[4],cahracter:{type:'idiot'},title:'No One Will Buy Me Too',category:['Non-Fiction']},
+{_id:33,ISBN:'a33',price:NumberDecimal("150.0"),pages:NumberInt(322),copies:NumberInt(470),language:'da',author:[3,2],cahracter:{type:'monkey'},title:'no one will buy me',category:['Non-Fiction']},
+{_id:33,ISBN:'a33',price:NumberDecimal("150.0"),pages:NumberInt(322),copies:NumberInt(470),language:'da',author:[3,2],cahracter:{type:'monkey'},title:'no one will buy me',category:['Non-Fiction']}
+])
+
+______________________________________________________
+
+order 
+
+db.order.insertMany([
+{_id:1,state:'done',date:'2020-05-10',book:[{price:NumberDecimal("10.0"),ISBN:'a1',qty:NumberInt(10)},{price:NumberDecimal("100.0"),ISBN:'a2',qty:NumberInt(10)}] },
+{_id:2,state:'done',date:'2020-05-10',book:[{price:NumberDecimal("102.0"),ISBN:'a3',qty:NumberInt(10)},{price:NumberDecimal("102.0"),ISBN:'a4',qty:NumberInt(10)}] },
+{_id:3,state:'done',date:'2020-05-10',book:[{price:NumberDecimal("142.0"),ISBN:'a5',qty:NumberInt(10)},{price:NumberDecimal("123.0"),ISBN:'a6',qty:NumberInt(10)}] },
+{_id:4,state:'done',date:'2020-05-10',book:[{price:NumberDecimal("1254.0"),ISBN:'a7',qty:NumberInt(10)},{price:NumberDecimal("123.0"),ISBN:'a8',qty:NumberInt(10)}] },
+{_id:5,state:'done',date:'2020-05-10',book:[{price:NumberDecimal("1235.0"),ISBN:'a9',qty:NumberInt(10)},{price:NumberDecimal("230.0"),ISBN:'a10',qty:NumberInt(10)}] },
+{_id:6,state:'done',date:'2020-05-10',book:[{price:NumberDecimal("120.0"),ISBN:'b11',qty:NumberInt(10)},{price:NumberDecimal("210.0"),ISBN:'a12',qty:NumberInt(10)}] },
+{_id:7,state:'done',date:'2020-05-10',book:[{price:NumberDecimal("510.0"),ISBN:'b13',qty:NumberInt(10)},{price:NumberDecimal("610.0"),ISBN:'a14',qty:NumberInt(10)}] },
+{_id:8,state:'done',date:'2020-05-10',book:[{price:NumberDecimal("231.0"),ISBN:'b15',qty:NumberInt(10)},{price:NumberDecimal("103.0"),ISBN:'a16',qty:NumberInt(10)}] },
+{_id:9,state:'done',date:'2020-05-10',book:[{price:NumberDecimal("160.0"),ISBN:'b17',qty:NumberInt(10)},{price:NumberDecimal("17.0"),ISBN:'a18',qty:NumberInt(10)}] },
+{_id:10,state:'done',date:'2020-05-10',book:[{price:NumberDecimal("190.0"),ISBN:'b19',qty:NumberInt(10)},{price:NumberDecimal("240.0"),ISBN:'a20',qty:NumberInt(10)}] },
+{_id:11,state:'done',date:'2020-05-10',book:[{price:NumberDecimal("250.0"),ISBN:'c21',qty:NumberInt(10)},{price:NumberDecimal("256.0"),ISBN:'a22',qty:NumberInt(10)}] },
+{_id:12,state:'done',date:'2020-05-10',book:[{price:NumberDecimal("460.0"),ISBN:'c23',qty:NumberInt(10)},{price:NumberDecimal("460.0"),ISBN:'a24',qty:NumberInt(10)}] },
+{_id:13,state:'done',date:'2020-05-10',book:[{price:NumberDecimal("460.0"),ISBN:'c25',qty:NumberInt(10)},{price:NumberDecimal("140.0"),ISBN:'a26',qty:NumberInt(10)}] },
+{_id:14,state:'done',date:'2020-05-10',book:[{price:NumberDecimal("177.0"),ISBN:'c27',qty:NumberInt(10)},{price:NumberDecimal("137.0"),ISBN:'a28',qty:NumberInt(10)},
+{price:NumberDecimal("137.0"),ISBN:'a29',qty:NumberInt(10)},{price:NumberDecimal("124.0"),ISBN:'c30',qty:NumberInt(10)},
+{price:NumberDecimal("124.0"),ISBN:'a31',qty:NumberInt(10)},{price:NumberDecimal("190.0"),ISBN:'c32',qty:NumberInt(10)}] }
+])
+
