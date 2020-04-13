@@ -4,7 +4,7 @@
 var authorId = db.author.find({name:'Bodil toft'},{_id:1}).next()._idvar matchAuthor = {$match: {author:authorId}}        db.book.aggregate([matchAuthor])///ordb.book.find( { author: { $eq: authorId } } )
 ______________-
 
-2. total price of an orderdb.order.aggregate([    { "$unwind": "$book" },    { "$group": {  _id: '$_id' , totalAmount: { $sum: { $multiply: [ "$book.qty", "$book.price" ] } }    }}])
+2. total price of an order// simple aggregate db.order.aggregate([    { "$unwind": "$book" },    { "$group": {  _id: '$_id' , totalAmount: { $sum: { $multiply: [ "$book.qty", "$book.price" ] } }    }}])
 //or 
 var booksTotalPice=  {
         $addFields: {
