@@ -1,5 +1,5 @@
 1.	Sell a book to a customer.
-8.	Sell 3 copies of one book and 2 of another in a single order
+7.	Sell 3 copies of one book and 2 of another in a single order
 
 //successful scenario
 
@@ -118,15 +118,15 @@ _______________________________
 
 3.	 Add an existing author to a book.
 var author = db.author.find({_id:4}).next()._id
-db.book.update({ISBN:'a1'},{$pull:{author:author}})
+db.book.update({ISBN:'a1'},{$addToSet:{author:author}})
 _______________________________
 
 4.	Retire the "Space Opera" category and assign all books from that category to the parent category. Don't assume you know the id of the parent category.
-7.	Retire the "Fantasy and Science Fiction" category and just use either "Fantasy" or "Science Fiction"
+6.	Retire the "Fantasy and Science Fiction" category and just use either "Fantasy" or "Science Fiction"
 
    
 var category = db.category.find({name:'Space Opera'}).next()
-var books = db.book.find({category:{$elemMatch:{$eq:category}}}).toArray() 
+var books = db.book.find({category:{$elemMatch:{$eq:category.name}}}).toArray() 
 books 
 
 
@@ -136,7 +136,7 @@ result
 
 
 ___________________________________
-6.	Change a book from Non-fiction to fiction, or vice versa.
+5.	Change a book from Non-fiction to fiction, or vice versa.
 db.book.update({_id:1},{$set:{category:['Non-Fiction']}})
 _____________________________________
 

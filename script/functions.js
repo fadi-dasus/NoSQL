@@ -214,6 +214,7 @@ db.system.js.save(
 
 
 
+
 db.system.js.save(
    {      
      _id : "updateBookCategory" ,
@@ -233,18 +234,16 @@ db.system.js.save(
 		
 		if (updateResult.matchedCount != books.length) {
 			successful = false;    
-		}
 		
-		if(successful == false){
 			//rollback
 			for (i = 0; i < books.length; i++) {
 			arrayOfOperations.push(
-				updateBook(books[i].ISBN, category)
+				updateBook(books[i].ISBN, category.name)
 			);
 		}
 			}
-			 if(successful == true){
-			db.category.remove({name:category})
+			 else{
+			db.category.remove({name:category.name})
 			 }
 		return successful;
 	}

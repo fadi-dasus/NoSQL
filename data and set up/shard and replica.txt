@@ -84,7 +84,9 @@ sh.enablesharding('assignment')
 
 //sharding the book collection, and use a compound sort key as our shard key on fields (ISBN and title}) for distributing chnks evenly on our shards
 
-sh.shardCollection('assignment.book',{ISBN:1,title:1}) compound shard key that ensure the uniqueness of the key
+sh.shardCollection('assignment.book',{ISBN:1,title:1}) compound sort shard key that ensure the uniqueness of the key
+sh.shardCollection('assignment.order',{_id:'hased'}) hashed shard key, on _id 
+sh.shardCollection('assignment.customer',{name:1,email:1}) 
 
 
 
