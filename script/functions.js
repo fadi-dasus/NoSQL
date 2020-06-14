@@ -237,10 +237,9 @@ db.system.js.save(
 		
 			//rollback
 			for (i = 0; i < books.length; i++) {
-			arrayOfOperations.push(
-				updateBook(books[i].ISBN, category.name)
-			);
-		}
+					arrayOfOperations.push(updateBook(books[i].ISBN, category.name));
+											}
+					db.book.bulkWrite(arrayOfOperations);
 			}
 			 else{
 			db.category.remove({name:category.name})

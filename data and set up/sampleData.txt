@@ -91,7 +91,6 @@ db.book.insertMany([
 {_id:32,ISBN:'a32',price:NumberDecimal("190.0"),pages:NumberInt(740),copies:NumberInt(470),language:'en',author:[2],cahracter:{type:'David Balfour'},title:'The Hobbitt',category:['Non-Fiction']},
 {_id:34,ISBN:'a34',price:NumberDecimal("190.0"),pages:NumberInt(740),copies:NumberInt(30),language:'en',author:[4],cahracter:{type:'idiot'},title:'No One Will Buy Me Too',category:['Non-Fiction']},
 {_id:33,ISBN:'a33',price:NumberDecimal("150.0"),pages:NumberInt(322),copies:NumberInt(470),language:'da',author:[3,2],cahracter:{type:'monkey'},title:'no one will buy me',category:['Non-Fiction']},
-{_id:33,ISBN:'a33',price:NumberDecimal("150.0"),pages:NumberInt(322),copies:NumberInt(470),language:'da',author:[3,2],cahracter:{type:'monkey'},title:'no one will buy me',category:['Non-Fiction']}
 ])
 
 ______________________________________________________

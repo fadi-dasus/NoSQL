@@ -56,7 +56,7 @@ var result = db.order.update({_id:order._id,state:'applied'},
 
 _______
 
-//fail scenario 
+//unsuccesful scenario 
 #not enough copies (the order must fail and then we will rollback)
 
 var initialOrder = {
