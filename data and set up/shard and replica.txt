@@ -12,7 +12,7 @@ var configuration = {
     _id:'shard1', 
     members:[
     {_id:0,host:'localhost:27117',votes:1},},
-    {_id:1,host:'localhost:27127',slaveDelay:20,priority:0,votes:1},
+    {_id:1,host:'localhost:27127',slaveDelay:20,priority:0,votes:1,hidden: true},
     {_id:2,host:'localhost:27137',votes:1}
             ]
        }

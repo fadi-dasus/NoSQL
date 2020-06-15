@@ -2,6 +2,7 @@
 7.	Sell 3 copies of one book and 2 of another in a single order
 
 //successful scenario
+db.loadServerScripts();
 
 var order = {
     _id : 18,
@@ -58,6 +59,7 @@ _______
 
 //unsuccesful scenario 
 #not enough copies (the order must fail and then we will rollback)
+db.loadServerScripts();
 
 var initialOrder = {
     _id : 21,
@@ -124,6 +126,7 @@ _______________________________
 4.	Retire the "Space Opera" category and assign all books from that category to the parent category. Don't assume you know the id of the parent category.
 6.	Retire the "Fantasy and Science Fiction" category and just use either "Fantasy" or "Science Fiction"
 
+db.loadServerScripts();
    
 var category = db.category.find({name:'Space Opera'}).next()
 var books = db.book.find({category:{$elemMatch:{$eq:category.name}}}).toArray() 
